@@ -2,11 +2,11 @@ import itertools
 
 
 towns = {
-    'a':{'b':5, 'c':3},
-    'b':{'a':5,},
-    'c':{'a':3, 'd':4},
-    'd':{'c':4, 'm':2},
-    'm':{'d':2}
+    'a': {'b': 2, 'd': 1},
+    'b': {'a': 2, 'c': 3, 'd': 3},
+    'c': {'b': 3, 'd': 3, 'e': 2},
+    'd': {'a': 1, 'b': 3, 'c': 3},
+    'e': {'b': 2}
 }
 
 def create_new_name():
@@ -117,7 +117,6 @@ def math_route(towns):
                     route = find_way
                     find_rout = way
                 if route > find_way:
-                    print(route)
                     route = find_way
                     find_rout = way
          
