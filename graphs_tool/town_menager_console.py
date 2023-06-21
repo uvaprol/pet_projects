@@ -1,9 +1,14 @@
 towns = {
-    'a':{'b':5, 'c':6, 'd':7},
-    'b':{'a':5},
-    'c':{'a':6},
-    'd':{'a':7},
+    'a':{'b':5, 'c':3},
+    'b':{'a':5,},
+    'c':{'a':3, 'd':4},
+    'd':{'c':4, 'm':2},
+    'm':{'d':2}
 }
+routes = {
+    
+}
+towns_mas=[]
 def create_new_name():
     new_name = str(input('new name: '))
     while towns.get(new_name) != None:
@@ -84,10 +89,26 @@ comands = {
     'show':show_town
 }
 
-while True:
-    try:
-        comand = comands.get(str(input('select comand:\nway\nrename\nshow\ncreate\n\n:')))
-        comand(towns)
-        print('___\n___')
-    except:
-        print('___\n___')
+
+def router(start, finish):
+    for key in towns:
+        towns_mas.append(key)
+    print(towns_mas)
+    for 
+
+def math_route(towns):
+    start = 'a'
+    finish = 'c'
+    find_way = -1
+    router(start, finish)
+    # print(route)
+            #print(f'{town} -> {way} == {towns[town][way]}')
+
+math_route(towns)
+# while True:
+#     try:
+#         comand = comands.get(str(input('select comand:\nway\nrename\nshow\ncreate\n\n:')))
+#         comand(towns)
+#         print('___\n___')
+#     except:
+#         print('___\n___')
