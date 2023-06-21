@@ -1,3 +1,6 @@
+import itertools
+
+
 towns = {
     'a':{'b':5, 'c':3},
     'b':{'a':5,},
@@ -5,10 +8,7 @@ towns = {
     'd':{'c':4, 'm':2},
     'm':{'d':2}
 }
-routes = {
-    
-}
-towns_mas=[]
+
 def create_new_name():
     new_name = str(input('new name: '))
     while towns.get(new_name) != None:
@@ -82,33 +82,55 @@ def show_town(towns):
         print(key, value)
     return
 
+def router(start, finish):
+    towns_mas=[]
+    for key in towns:
+        towns_mas.append(key)
+    towns_mas = itertools.permutations(towns_mas)
+    return towns_mas
+
+def way_calculade(way):
+    global towns
+    rout = 0
+    for key in range(len(way)-1):
+        try:
+            rout += (towns[way[key]][way[key+1]])
+        except:
+            rout = 0
+    return rout,way
+    
+def math_route(towns):
+    start = str(input('start town: '))
+    finish = str(input('finish town: '))
+    route = -1
+    towns_mas = router(start, finish)
+    for i in towns_mas:
+        if i[0] == start and i[-1] == finish:
+            find_way, way = way_calculade(i)
+            if find_way < route and (route != -1) and find_way > 0:
+                route = find_way
+            elif (route == -1):
+                route = find_way
+    str_way = f'{way[0]} -> '
+    for i in range(1,len(way)-1):
+        str_way += f'{way[i]} -> ' 
+    print(f'{str_way}{way[-1]} == {route}')
+
+
+
+
 comands = {
     'create':create_town,
     'way':create_ways,
     'rename': rename_town,
-    'show':show_town
+    'show':show_town,
+    'route':math_route
 }
 
-
-def router(start, finish):
-    for key in towns:
-        towns_mas.append(key)
-    print(towns_mas)
-    for 
-
-def math_route(towns):
-    start = 'a'
-    finish = 'c'
-    find_way = -1
-    router(start, finish)
-    # print(route)
-            #print(f'{town} -> {way} == {towns[town][way]}')
-
-math_route(towns)
-# while True:
-#     try:
-#         comand = comands.get(str(input('select comand:\nway\nrename\nshow\ncreate\n\n:')))
-#         comand(towns)
-#         print('___\n___')
-#     except:
-#         print('___\n___')
+while True:
+    try:
+        comand = comands.get(str(input('select comand:\nway\nrename\nshow\ncreate\nroute\n\n:')))
+        comand(towns)
+        print('___\n___')
+    except:
+        print('___\n___')
