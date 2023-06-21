@@ -15,10 +15,12 @@ def create_town(towns, town = ''):
     if town != '':
         towns[town]={}
         return towns
-    while town_name != '':
+    while True:
         town_name = create_new_name()
-        towns[town_name]={}
-    return towns
+        if town_name != '':
+            towns[town_name]={}
+        else:
+            return towns
 
 def rename_town(towns):
     if towns == {}:
@@ -37,7 +39,6 @@ def rename_town(towns):
             new_name = create_new_name()
             for town_key in towns:
                 if town_key != town:
-                    print(town_key)
                     towns[town_key][new_name] = towns[town_key].pop(town)
             towns[new_name] = towns.pop(town)
         else:
