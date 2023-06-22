@@ -49,28 +49,35 @@ def create_ways(towns):
     if parent_town == '':
         return towns
     try:
-        ways = towns[parent_town]
+        parent_ways = towns[parent_town]
     except:
-        ways = {}
+        parent_ways = {}
     while True:
         child_town = str(input(f'{parent_town} -> '))
+        try:
+            child_ways = towns[child_town]
+        except:
+            child_ways = {}
         if child_town == '':
-            towns[parent_town] = ways
+            towns[parent_town] = parent_ways
+            if child_ways != {}:
+                towns[child_town] = child_ways
+                return towns
             return towns
         if parent_town == child_town:
             print('chek town name')
             continue
-        if ways.get(child_town) != None:
+        if parent_ways.get(child_town) != None:
             agree = str(input(f'Do you want change way to {child_town} y/n: '))
             if agree == 'y':
                 way = int(input(f'way {child_town}: '))
-                ways[child_town] = way
+                parent_ways[child_town] = way
                 child_ways = towns[child_town]
                 child_ways[parent_town] = way
         else:
             way = int(input(f'way {child_town}: '))
-            ways[child_town] = way
-            towns[child_town] = {parent_town: way}
+            parent_ways[child_town] = way
+            child_ways[parent_town] = way
             
 def show_town(towns):
     for key, value in towns.items():
