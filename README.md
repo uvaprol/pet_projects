@@ -1,2 +1,2 @@
-# town_menager
-it is a tool for solving graphs
+# my pet projects
+my pet projects
