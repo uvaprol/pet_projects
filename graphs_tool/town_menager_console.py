@@ -84,16 +84,33 @@ def show_town(towns):
         print(key, value)
     return
 
+def GADZILA(towns):
+    bait = str(input('what town delete: '))
+    if bait == '':
+        return towns
+    if towns[bait] != None:
+        agree = str(input(('are you sure you want to delete!!!').upper() + ' y/n: '))
+        del towns[bait]
+        for key in towns:
+            try:
+                del towns[key][bait]
+            except:
+                pass
+    else:
+        print('town has been destroy')
+    return towns
+
 comands = {
     'create':create_town,
     'way':create_ways,
     'rename': rename_town,
-    'show':show_town
+    'show':show_town,
+    'del':GADZILA
 }
 
 while True:
     try:
-        comand = comands.get(str(input('select comand:\nway\nrename\nshow\ncreate\n\n:')))
+        comand = comands.get(str(input('select comand:\nway\nrename\nshow\ncreate\ndel\n\n:')))
         comand(towns)
         print('___\n___')
     except:
