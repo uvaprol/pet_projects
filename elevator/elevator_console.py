@@ -1,32 +1,48 @@
-class Elevator():
+class Elevator:
+    
     def __init__(self):
-        print(elevator)
-    def create(n):
-        if elevator != {}:
-            elevator_list = [key for key in elevator]
+        self.elevator = {}
+        
+    def create(self, n = 1):
+        if self.elevator != {}:
+            elevator_list = [key for key in self.elevator]
             elevator_list.sort()
-            last_number = elevator_list[-1] + 1
+            start = elevator_list[-1] + 1
+            stop = start + n
         else:
-            last_number = 1
-        for i in range(last_number, last_number + n):
-            elevator[i] = {'move' : False, 'floor': 1}
-        return elevator
-    def delete(n = 1):
-        if elevator != {}:
-            elevator_list = [key for key in elevator]
+            start = 1
+            stop = start + n
+        for i in range(start, stop):
+            self.elevator[i] = {'move' : False, 'floor': 1}
+        return self.elevator
+        
+    def delete(self, n = 1):
+        if self.elevator != {}:
+            elevator_list = [key for key in self.elevator]
             elevator_list.sort()
             start = len(elevator_list)
             stop = start - n
             for i in range(start, stop, -1):
-                del elevator[i]
-            return elevator
+                del self.elevator[i]
+            return self.elevator
         else:
             print('No elevators')
     
+    def show(self):
+        return self.elevator
     
     
+    
+a = Elevator()
+b = Elevator()
 
-a = Elevator.create(5)
-print(a)
-a = Elevator.delete()
-print(a)
+
+a.create(5)
+a.delete()
+
+
+b.create(4)
+b.delete()
+
+print(a.show())
+print(b.show())
