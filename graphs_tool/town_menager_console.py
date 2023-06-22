@@ -88,7 +88,7 @@ def GADZILA(towns):
     bait = str(input('what town delete: '))
     if bait == '':
         return towns
-    if towns[bait] != None:
+    if towns.get(bait) != None:
         agree = str(input(('are you sure you want to delete!!!').upper() + ' y/n: '))
         del towns[bait]
         for key in towns:
