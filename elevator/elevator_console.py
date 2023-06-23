@@ -5,10 +5,9 @@ class Elevator:
         
     def create(self, n = 1):
         if self.elevator != {}:
-            elevator_list = [key for key in self.elevator]
-            elevator_list.sort()
-            start = elevator_list[-1] + 1
-            stop = start + n
+            last_elevator = max([number for number in self.elevator])
+            start = last_elevator + 1
+            stop = start + n + 1
         else:
             start = 1
             stop = start + n
@@ -32,14 +31,14 @@ class Elevator:
         return self.elevator
     
     
-    
+'''--------------------------------------------Test space--------------------------------------------'''
 a = Elevator()
 b = Elevator()
 
 
-a.create(5)
+a.create(2)
 a.delete()
-
+a.create(2)
 
 b.create(4)
 b.delete()
