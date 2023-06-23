@@ -7,10 +7,9 @@ class Elevator:
         if self.elevator != {}:
             last_elevator = max([number for number in self.elevator])
             start = last_elevator + 1
-            stop = start + n + 1
         else:
             start = 1
-            stop = start + n
+        stop = start + n
         for i in range(start, stop):
             self.elevator[i] = {'move' : False, 'floor': 1}
         return self.elevator
