@@ -11,7 +11,6 @@ class Elevator:
         stop = start + n
         for i in range(start, stop):
             self.elevator[i] = {'move' : False, 'floor': 1}
-        return self.elevator
         
     def delete(self, n = 1):
         if self.elevator != {}:
@@ -20,16 +19,20 @@ class Elevator:
                 if str(input('Do you want delete all elevators? y/n: ')) == 'y':
                     n = elevator_count
                 else:
-                    return self.elevator
+                    return
             start = elevator_count
             stop = start - n
             for i in range(start, stop, -1):
                 del self.elevator[i]
-            return self.elevator
         else:
             print('No elevators')
     
-    def show(self):
+    def show(self, name = ''):
+        print(f'Elevators group {name}:')
+        for key, value in (self.elevator).items():
+            print(f'elevator {key}: status{value}')
+
+    def get_value(self):
         return self.elevator
     
     
@@ -39,12 +42,9 @@ b = Elevator()
 
 
 a.create(2)
-a.delete(3)
-a.create(3)
-a.delete(5)
-
 b.create(4)
 b.delete()
 
-print(a.show())
-print(b.show())
+a.show()
+b.show('b')
+# print(a.get_value())
