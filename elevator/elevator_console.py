@@ -5,8 +5,7 @@ class Elevator:
         
     def create(self, n = 1):
         if self.elevator != {}:
-            last_elevator = max([number for number in self.elevator])
-            start = last_elevator + 1
+            start = max(self.elevator) + 1
         else:
             start = 1
         stop = start + n
@@ -16,9 +15,13 @@ class Elevator:
         
     def delete(self, n = 1):
         if self.elevator != {}:
-            elevator_list = [key for key in self.elevator]
-            elevator_list.sort()
-            start = len(elevator_list)
+            elevator_count = len(self.elevator)
+            if elevator_count <= n:
+                if str(input('Do you want delete all elevators? y/n: ')) == 'y':
+                    n = elevator_count
+                else:
+                    return self.elevator
+            start = elevator_count
             stop = start - n
             for i in range(start, stop, -1):
                 del self.elevator[i]
@@ -36,8 +39,9 @@ b = Elevator()
 
 
 a.create(2)
-a.delete()
-a.create(2)
+a.delete(3)
+a.create(3)
+a.delete(5)
 
 b.create(4)
 b.delete()
