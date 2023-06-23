@@ -1,7 +1,8 @@
-class Elevator:
+class Elevator(object):
     
-    def __init__(self):
+    def __init__(self, name = ''):
         self.elevator = {}
+        self.name = name
         
     def create(self, n = 1):
         if self.elevator != {}:
@@ -28,9 +29,9 @@ class Elevator:
         else:
             print('No elevators')
     
-    def show(self, name = ''):
+    def show(self):
         if self.elevator != {}:
-            print(f'Elevators group {name}:')
+            print(f'Elevators group {self.name}:')
             for key, value in (self.elevator).items():
                 print(f'elevator {key}: status{value}')
         else:
@@ -38,19 +39,36 @@ class Elevator:
         
     def get_value(self):
         return self.elevator
+        
+    def rename(self, name = ''):
+        if name != '':
+            self.name = name
+            
+    def move(self, floor):
+        if self.elevator != {}:
+            number = 1
+            distance = abs(floor - self.elevator[1]['floor'])
+            for key in self.elevator:
+                if abs(floor - self.elevator[key]['floor']) < distance:
+                    distance = abs(floor - self.elevator[key]['floor'])
+                    number = key
+            self.elevator[number]['floor'] = floor
+        else:
+            print('No elevators')
     
     
 '''--------------------------------------------Test space--------------------------------------------'''
-a = Elevator()
-b = Elevator()
-
-
-a.create(2)
-b.create(4)
-b.delete()
-
-a.show()
-b.show('b')
-c = Elevator().show()
-c = Elevator().create(1)
-print(c)
+if __name__ == "__main__":
+    a = Elevator('a')
+    b = Elevator('b')
+    
+    
+    a.create(2)
+    a.rename('')
+    a.show()
+    a.move(4)
+    a.show()
+    a.move(2)
+    a.show()
+    a.move(1)
+    a.show()
