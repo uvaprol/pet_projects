@@ -11,7 +11,7 @@ class Elevator(object):
             start = 1
         stop = start + n
         for i in range(start, stop):
-            self.elevator[i] = {'move' : False, 'floor': 1}
+            self.elevator[i] = {'move' : False, 'floor': 1, 'task': [], 'direction': 0}
         return self.elevator
         
     def delete(self, n = 1):
@@ -48,11 +48,15 @@ class Elevator(object):
         if self.elevator != {}:
             number = 1
             distance = abs(floor - self.elevator[1]['floor'])
+            direction = int(floor - self.elevator[1]['floor'] >= 0) 
             for key in self.elevator:
                 if abs(floor - self.elevator[key]['floor']) < distance:
                     distance = abs(floor - self.elevator[key]['floor'])
                     number = key
+                    direction = int(floor - self.elevator[key]['floor'] >= 0)
             self.elevator[number]['floor'] = floor
+            self.elevator[number]['direction'] = direction
+            
         else:
             print('No elevators')
     
@@ -62,7 +66,7 @@ if __name__ == "__main__":
     a = Elevator('a')
     b = Elevator('b')
     
-    
+
     a.create(2)
     a.rename('')
     a.show()
