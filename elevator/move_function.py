@@ -1,43 +1,74 @@
-def move(el, move_list):
-    # floor = move_list[-1]
-
-    # for key in el:
-    #     if el[key]['ready_move']:
-    #         number = key
-    #         distance = abs(floor - el[key]['floor'])
-    #         direction = int(floor - el[key]['floor'] >= 0) 
-    #         break
-    # try:
-    #     for key in el:
-    #         if abs(floor - el[key]['floor']) < distance and el[key]['ready_move']:
-    #             distance = abs(floor - el[key]['floor'])
-    #             number = key
-    # except:
-    #     pass
-    # print(number)
+from random import randint as rd
+from time import sleep
+def move(el, move_map):
     
-    while True:
+    # # hand control
+    # while True:
+    #     pos = el['floor']
+    #     try:
+    #         move_map.append(int(input(':')))
+    #     except:
+    #         pass
+        
+        
+    # auto control
+    for _ in range(15):  
         pos = el['floor']
-        try:
-            move_list.append(int(input(':')))
-        except:
-            pass
-        if pos<move_list[-1]:
-            el['floor'] = el['floor'] + 1
-            el['move'] = False
-        elif pos>move_list[-1]:
-            el['floor'] = el['floor'] - 1
-            el['move'] = False
-        if len(move_list)>1 and move_list[-1]==pos:
-            del move_list[-1]
-        print(el)
-        el['move'] = True
+        sleep(1)
+        pk = True
+        if rd(1,10) > 7:
+                move_map.append(rd(1,10))
+                print(f':{move_map[-1]}')
+                pk = False
+        if pk:
+            print(':')
+        
+        
+        
+    # code start
+        # repeat check
+        for i in range(len(move_map)-1):
+            if move_map[i] == move_map[-1]:
+                del move_map[-1]
+                break
+        move_map.sort()
+        
+        # task check
+        if move_map != []:
+            if move_map[0] == pos:
+                del move_map[0]
+                el['move'] = False
+                el['direction'] = 'stop'
+            elif move_map[-1] == pos:
+                del move_map[-1]
+                el['move'] = False
+                el['direction'] = 'stop'
+            print(el)
+            
+            # moving
+            if move_map != []:
+                if pos < move_map[-1] and (el['direction'] == 'stop' or el['direction'] == 'up'):
+                    el['floor'] = el['floor'] + 1
+                    el['move'] = True
+                    el['direction'] = 'up'
+                    
+                if pos > move_map[0] and (el['direction'] == 'stop' or el['direction'] == 'down'):
+                    el['floor'] = el['floor'] - 1
+                    el['move'] = True
+                    el['direction'] = 'down'
+        else:
+            print(el)
+            
+            
+            
+            
+            
 el = {
-    1: {'move': False, 'floor': 1, 'task': [], 'derection': 'stop'},
-    2: {'move': False, 'floor': 1, 'task': [], 'derection': 'stop'},
-    3: {'move': False, 'floor': 1, 'task': [], 'derection': 'stop'}
+    1: {'move': False, 'floor': 9, 'task': [], 'direction': 'stop'},
+    2: {'move': False, 'floor': 1, 'task': [], 'direction': 'stop'},
+    3: {'move': False, 'floor': 1, 'task': [], 'direction': 'stop'}
     
 }
 
-move(el[1], [9])
+move(el[1], [])
 print('stop')
