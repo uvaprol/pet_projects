@@ -19,26 +19,23 @@ def move(el, move_list):
     while True:
         pos = el['floor']
         try:
-            floor = int(input(':'))
+            move_list.append(int(input(':')))
         except:
-            floor = move_list[-1] 
+            pass
         if pos<move_list[-1]:
-            if floor > pos and floor < move_list[-1]:
-                move_list.append(floor)
             el['floor'] = el['floor'] + 1
+            el['move'] = False
         elif pos>move_list[-1]:
-            if floor < pos and floor > move_list[-1]:
-                move_list.append(floor)
             el['floor'] = el['floor'] - 1
-        print(pos)
+            el['move'] = False
         if len(move_list)>1 and move_list[-1]==pos:
-            print('stop')
             del move_list[-1]
-            
+        print(el)
+        el['move'] = True
 el = {
-    1: {'ready_move': True, 'floor': 1, 'task': [], 'derection': 'stop'},
-    2: {'ready_move': True, 'floor': 1, 'task': [], 'derection': 'stop'},
-    3: {'ready_move': True, 'floor': 1, 'task': [], 'derection': 'stop'}
+    1: {'move': False, 'floor': 1, 'task': [], 'derection': 'stop'},
+    2: {'move': False, 'floor': 1, 'task': [], 'derection': 'stop'},
+    3: {'move': False, 'floor': 1, 'task': [], 'derection': 'stop'}
     
 }
 
