@@ -16,7 +16,7 @@ padlock = 'password'
 
 
 i = 0
-rep = 5
+rep = 1
 from itertools import product
 alph = (''.join([chr(i) for i in range(65,123)]))
 while True:
